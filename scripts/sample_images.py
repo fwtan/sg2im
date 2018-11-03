@@ -18,7 +18,7 @@
 This script can be used to sample many images from a model for evaluation.
 """
 
-
+import _init_paths
 import argparse, json
 import os
 
