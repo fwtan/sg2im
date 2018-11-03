@@ -38,19 +38,19 @@ from sg2im.vis import draw_scene_graph
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--checkpoint', default='sg2im-models/vg64.pt')
+parser.add_argument('--checkpoint', default='sg2im-models/coco64.pt')
 parser.add_argument('--checkpoint_list', default=None)
 parser.add_argument('--model_mode', default='eval', choices=['train', 'eval'])
 
 # Shared dataset options
-parser.add_argument('--dataset', default='vg', choices=['coco', 'vg'])
+parser.add_argument('--dataset', default='coco', choices=['coco', 'vg'])
 parser.add_argument('--image_size', default=(64, 64), type=int_tuple)
 parser.add_argument('--batch_size', default=24, type=int)
 parser.add_argument('--shuffle', default=False, type=bool_flag)
 parser.add_argument('--loader_num_workers', default=4, type=int)
 parser.add_argument('--num_samples', default=10000, type=int)
-parser.add_argument('--save_gt_imgs', default=False, type=bool_flag)
-parser.add_argument('--save_graphs', default=False, type=bool_flag)
+parser.add_argument('--save_gt_imgs', default=True, type=bool_flag)
+parser.add_argument('--save_graphs', default=True, type=bool_flag)
 parser.add_argument('--use_gt_boxes', default=False, type=bool_flag)
 parser.add_argument('--use_gt_masks', default=False, type=bool_flag)
 parser.add_argument('--save_layout', default=True, type=bool_flag)
@@ -64,7 +64,7 @@ parser.add_argument('--vg_image_dir',
         default=os.path.join(VG_DIR, 'images'))
 
 # For COCO
-COCO_DIR = os.path.expanduser('~/datasets/coco/2017')
+COCO_DIR = os.path.expanduser('datasets/coco')
 parser.add_argument('--coco_image_dir',
         default=os.path.join(COCO_DIR, 'images/val2017'))
 parser.add_argument('--instances_json',
