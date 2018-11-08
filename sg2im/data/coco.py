@@ -356,7 +356,7 @@ class CocoSceneGraphDataset(Dataset):
       triples.append([i, in_image, O - 1])
     
     triples = torch.LongTensor(triples)
-    return image, objs, boxes, masks, triples
+    return image, objs, boxes, masks, triples, image_id
     
 
 def seg_to_mask(seg, width=1.0, height=1.0):
@@ -386,10 +386,10 @@ def coco_collate_fn(batch):
   - obj_to_img: LongTensor of shape (O,) mapping objects to images
   - triple_to_img: LongTensor of shape (T,) mapping triples to images
   """
-  all_imgs, all_objs, all_boxes, all_masks, all_triples = [], [], [], [], []
+  all_imgs, all_objs, all_boxes, all_masks, all_triples, all_image_indices = [], [], [], [], [], []
   all_obj_to_img, all_triple_to_img = [], []
   obj_offset = 0
-  for i, (img, objs, boxes, masks, triples) in enumerate(batch):
+  for i, (img, objs, boxes, masks, triples, image_index) in enumerate(batch):
     all_imgs.append(img[None])
     if objs.dim() == 0 or triples.dim() == 0:
       continue
@@ -401,6 +401,7 @@ def coco_collate_fn(batch):
     triples[:, 0] += obj_offset
     triples[:, 2] += obj_offset
     all_triples.append(triples)
+    all_image_indices.append(image_index)
 
     all_obj_to_img.append(torch.LongTensor(O).fill_(i))
     all_triple_to_img.append(torch.LongTensor(T).fill_(i))
@@ -413,8 +414,9 @@ def coco_collate_fn(batch):
   all_triples = torch.cat(all_triples)
   all_obj_to_img = torch.cat(all_obj_to_img)
   all_triple_to_img = torch.cat(all_triple_to_img)
+  all_image_indices = torch.cat(all_image_indices)
 
   out = (all_imgs, all_objs, all_boxes, all_masks, all_triples,
-         all_obj_to_img, all_triple_to_img)
+         all_obj_to_img, all_triple_to_img, all_image_indices)
   return out
 

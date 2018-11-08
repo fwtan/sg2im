@@ -174,9 +174,11 @@ def run_model(args, checkpoint, output_dir, loader=None):
   for batch in loader:
     masks = None
     if len(batch) == 6:
-      imgs, objs, boxes, triples, obj_to_img, triple_to_img = [x.cuda() for x in batch]
+      imgs, objs, boxes, triples, obj_to_img, triple_to_img, image_indices = [x.cuda() for x in batch]
     elif len(batch) == 7:
-      imgs, objs, boxes, masks, triples, obj_to_img, triple_to_img = [x.cuda() for x in batch]
+      imgs, objs, boxes, masks, triples, obj_to_img, triple_to_img, image_indices = [x.cuda() for x in batch]
+
+    image_indices = image_indices.cpu().data.numpy()
 
     imgs_gt = imagenet_deprocess_batch(imgs)
     boxes_gt = None
@@ -207,7 +209,8 @@ def run_model(args, checkpoint, output_dir, loader=None):
       masks_gt = obj_data_gt[1]
 
     for i in range(imgs_pred.size(0)):
-      img_filename = '%04d.png' % img_idx
+      # img_filename = '%04d.png' % img_idx
+      img_filename = 'COCO_val2014_%012d.jpg' % image_indices[i]
       if args.save_gt_imgs:
         img_gt = imgs_gt[i].numpy().transpose(1, 2, 0)
         img_gt_path = os.path.join(gt_img_dir, img_filename)
