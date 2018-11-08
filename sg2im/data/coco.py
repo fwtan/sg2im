@@ -414,7 +414,7 @@ def coco_collate_fn(batch):
   all_triples = torch.cat(all_triples)
   all_obj_to_img = torch.cat(all_obj_to_img)
   all_triple_to_img = torch.cat(all_triple_to_img)
-  all_image_indices = torch.cat(all_image_indices)
+  all_image_indices = torch.from_numpy(np.array(all_image_indices))
 
   out = (all_imgs, all_objs, all_boxes, all_masks, all_triples,
          all_obj_to_img, all_triple_to_img, all_image_indices)
