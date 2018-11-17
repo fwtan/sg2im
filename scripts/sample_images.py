@@ -66,11 +66,11 @@ parser.add_argument('--vg_image_dir',
 # For COCO
 COCO_DIR = os.path.expanduser('datasets/coco')
 parser.add_argument('--coco_image_dir',
-        default=os.path.join(COCO_DIR, 'images/val2017'))
+        default=os.path.join(COCO_DIR, 'images/train2017'))
 parser.add_argument('--instances_json',
-        default=os.path.join(COCO_DIR, 'annotations/instances_val2017.json'))
+        default=os.path.join(COCO_DIR, 'annotations/instances_train2017.json'))
 parser.add_argument('--stuff_json',
-        default=os.path.join(COCO_DIR, 'annotations/stuff_val2017.json'))
+        default=os.path.join(COCO_DIR, 'annotations/stuff_train2017.json'))
 
 
 def build_coco_dset(args, checkpoint):
