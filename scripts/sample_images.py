@@ -45,7 +45,7 @@ parser.add_argument('--model_mode', default='eval', choices=['train', 'eval'])
 # Shared dataset options
 parser.add_argument('--dataset', default='coco', choices=['coco', 'vg'])
 parser.add_argument('--image_size', default=(64, 64), type=int_tuple)
-parser.add_argument('--batch_size', default=1, type=int)
+parser.add_argument('--batch_size', default=24, type=int)
 parser.add_argument('--shuffle', default=False, type=bool_flag)
 parser.add_argument('--loader_num_workers', default=4, type=int)
 parser.add_argument('--num_samples', default=10000, type=int)
@@ -179,8 +179,8 @@ def run_model(args, checkpoint, output_dir, loader=None):
       imgs, objs, boxes, masks, triples, obj_to_img, triple_to_img, image_indices = [x.cuda() for x in batch]
 
     image_indices = image_indices.cpu().data.numpy()
-    if image_indices[0] != 14380 or image_indices[0] != 122166:
-      continue
+    # if image_indices[0] != 14380 or image_indices[0] != 122166:
+    #   continue
 
     imgs_gt = imagenet_deprocess_batch(imgs)
     boxes_gt = None
