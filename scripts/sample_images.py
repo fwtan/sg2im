@@ -45,7 +45,7 @@ parser.add_argument('--model_mode', default='eval', choices=['train', 'eval'])
 # Shared dataset options
 parser.add_argument('--dataset', default='coco', choices=['coco', 'vg'])
 parser.add_argument('--image_size', default=(64, 64), type=int_tuple)
-parser.add_argument('--batch_size', default=24, type=int)
+parser.add_argument('--batch_size', default=32, type=int)
 parser.add_argument('--shuffle', default=False, type=bool_flag)
 parser.add_argument('--loader_num_workers', default=4, type=int)
 parser.add_argument('--num_samples', default=10000, type=int)
@@ -66,11 +66,11 @@ parser.add_argument('--vg_image_dir',
 # For COCO
 COCO_DIR = os.path.expanduser('datasets/coco')
 parser.add_argument('--coco_image_dir',
-        default=os.path.join(COCO_DIR, 'images/val2017'))
+        default=os.path.join(COCO_DIR, 'images/train2017'))
 parser.add_argument('--instances_json',
-        default=os.path.join(COCO_DIR, 'annotations/instances_val2017.json'))
+        default=os.path.join(COCO_DIR, 'annotations/instances_train2017.json'))
 parser.add_argument('--stuff_json',
-        default=os.path.join(COCO_DIR, 'annotations/stuff_val2017.json'))
+        default=os.path.join(COCO_DIR, 'annotations/stuff_train2017.json'))
 
 
 def build_coco_dset(args, checkpoint):
