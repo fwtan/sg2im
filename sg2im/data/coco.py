@@ -33,7 +33,7 @@ class CocoSceneGraphDataset(Dataset):
   def __init__(self, image_dir, instances_json, stuff_json=None,
                stuff_only=True, image_size=(64, 64), mask_size=16,
                normalize_images=True, max_samples=None,
-               include_relationships=True, min_object_size=0.001,
+               include_relationships=True, min_object_size=0.0001,
                min_objects_per_image=1, max_objects_per_image=100,
                include_other=False, instance_whitelist=None, stuff_whitelist=None):
     """
