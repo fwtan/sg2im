@@ -178,7 +178,7 @@ def run_model(args, checkpoint, output_dir, loader=None):
     elif len(batch) == 8:
       imgs, objs, boxes, masks, triples, obj_to_img, triple_to_img, image_indices = [x.cuda() for x in batch]
 
-    image_indices = image_indices.cpu().data.numpy().astype(np.int)
+    image_indices = image_indices.cpu().data.numpy()
     if not (22599 in image_indices):
       print(img_idx, image_indices)
       img_idx += args.batch_size
