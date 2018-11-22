@@ -102,7 +102,6 @@ class CocoSceneGraphDataset(Dataset):
       self.image_id_to_filename[image_id] = filename
       self.image_id_to_size[image_id] = (width, height)
     # self.image_ids = sorted(self.image_ids)
-    assert(22599 in self.image_ids)
     
     self.vocab = {
       'object_name_to_idx': {},
@@ -208,6 +207,8 @@ class CocoSceneGraphDataset(Dataset):
     self.vocab['pred_name_to_idx'] = {}
     for idx, name in enumerate(self.vocab['pred_idx_to_name']):
       self.vocab['pred_name_to_idx'][name] = idx
+
+    assert(22599 in self.image_ids)
 
   def set_image_size(self, image_size):
     print('called set_image_size', image_size)
