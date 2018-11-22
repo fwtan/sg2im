@@ -33,7 +33,7 @@ class CocoSceneGraphDataset(Dataset):
   def __init__(self, image_dir, instances_json, stuff_json=None,
                stuff_only=False, image_size=(64, 64), mask_size=16,
                normalize_images=True, max_samples=None,
-               include_relationships=True, min_object_size=0.0001,
+               include_relationships=True, min_object_size=0.0,
                min_objects_per_image=1, max_objects_per_image=100,
                include_other=False, instance_whitelist=None, stuff_whitelist=None):
     """
@@ -102,6 +102,7 @@ class CocoSceneGraphDataset(Dataset):
       self.image_id_to_filename[image_id] = filename
       self.image_id_to_size[image_id] = (width, height)
     # self.image_ids = sorted(self.image_ids)
+    assert(22599 in self.image_ids)
     
     self.vocab = {
       'object_name_to_idx': {},
@@ -191,6 +192,8 @@ class CocoSceneGraphDataset(Dataset):
     for image_id in self.image_ids:
       num_objs = len(self.image_id_to_objects[image_id])
       total_objs += num_objs
+      if image_id == 22599:
+        print('22599 num_objs: ', num_objs)
       if min_objects_per_image <= num_objs <= max_objects_per_image:
         new_image_ids.append(image_id)
     self.image_ids = new_image_ids
