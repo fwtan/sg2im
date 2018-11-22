@@ -31,7 +31,7 @@ from .utils import imagenet_preprocess, Resize
 
 class CocoSceneGraphDataset(Dataset):
   def __init__(self, image_dir, instances_json, stuff_json=None,
-               stuff_only=True, image_size=(64, 64), mask_size=16,
+               stuff_only=False, image_size=(64, 64), mask_size=16,
                normalize_images=True, max_samples=None,
                include_relationships=True, min_object_size=0.0001,
                min_objects_per_image=1, max_objects_per_image=100,
@@ -101,6 +101,7 @@ class CocoSceneGraphDataset(Dataset):
       self.image_ids.append(image_id)
       self.image_id_to_filename[image_id] = filename
       self.image_id_to_size[image_id] = (width, height)
+    # self.image_ids = sorted(self.image_ids)
     
     self.vocab = {
       'object_name_to_idx': {},
