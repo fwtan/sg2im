@@ -47,7 +47,7 @@ parser.add_argument('--dataset', default='coco', choices=['coco', 'vg'])
 parser.add_argument('--image_size', default=(64, 64), type=int_tuple)
 parser.add_argument('--batch_size', default=1, type=int)
 parser.add_argument('--shuffle', default=False, type=bool_flag)
-parser.add_argument('--loader_num_workers', default=4, type=int)
+parser.add_argument('--loader_num_workers', default=1, type=int)
 parser.add_argument('--num_samples', default=10000, type=int)
 parser.add_argument('--save_gt_imgs', default=True, type=bool_flag)
 parser.add_argument('--save_graphs',  default=False, type=bool_flag)
@@ -179,7 +179,7 @@ def run_model(args, checkpoint, output_dir, loader=None):
       imgs, objs, boxes, masks, triples, obj_to_img, triple_to_img, image_indices = [x.cuda() for x in batch]
 
     image_indices = image_indices.cpu().data.numpy()
-    if image_indices[0] != 22599:
+    if int(image_indices[0]) != 22599:
       print(img_idx, image_indices[0])
       img_idx += 1
       continue
