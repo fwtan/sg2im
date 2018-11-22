@@ -102,6 +102,7 @@ class CocoSceneGraphDataset(Dataset):
       self.image_id_to_filename[image_id] = filename
       self.image_id_to_size[image_id] = (width, height)
     # self.image_ids = sorted(self.image_ids)
+    assert(22599 in self.image_ids)
     
     self.vocab = {
       'object_name_to_idx': {},
