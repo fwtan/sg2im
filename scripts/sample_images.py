@@ -180,7 +180,8 @@ def run_model(args, checkpoint, output_dir, loader=None):
 
     image_indices = image_indices.cpu().data.numpy()
     if image_indices[0] != 22599:
-      print(image_indices[0])
+      print(img_idx, image_indices[0])
+      img_idx += 1
       continue
 
     imgs_gt = imagenet_deprocess_batch(imgs)
@@ -244,6 +245,7 @@ def run_model(args, checkpoint, output_dir, loader=None):
 
     torch.save(data, data_path)
     print('Saved %d images' % img_idx)
+    break
   
 
 def main(args):
