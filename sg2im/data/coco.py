@@ -196,6 +196,8 @@ class CocoSceneGraphDataset(Dataset):
         print('22599 num_objs: ', num_objs)
       if min_objects_per_image <= num_objs <= max_objects_per_image:
         new_image_ids.append(image_id)
+      elif image_id == 22599:
+        new_image_ids.append(image_id)
     self.image_ids = new_image_ids
 
     self.vocab['pred_idx_to_name'] = [
